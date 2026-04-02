@@ -1,0 +1,118 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.buffalo.edu/"
+      ],
+      "description": "University at Buffalo main homepage with hero slideshow, program finder, news stories, events, testimonials, stats, and video CTA",
+      "blocks": [
+        {
+          "name": "carousel",
+          "instances": [
+            "#randomized-slideshow",
+            "div.facesvoiceshero.carousel"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "ul.list-style-teaser-grid-story",
+            "#events-wrapper"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            "#stats-table"
+          ]
+        },
+        {
+          "name": "hero",
+          "instances": [
+            "#tlw-video"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-hero",
+          "name": "Hero Slideshow",
+          "selector": "#randomized-slideshow",
+          "style": null,
+          "blocks": [
+            "carousel"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-programs",
+          "name": "Find Your Program",
+          "selector": "#findYourProgram",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "h2#hpProgramsTitle",
+            "#hpProgramsRight p",
+            "#findYourProgram-ctaButtons .core-button a"
+          ]
+        },
+        {
+          "id": "section-news",
+          "name": "News Stories Grid",
+          "selector": "ul.list-style-teaser-grid-story",
+          "style": "ub-blue",
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-research",
+          "name": "Research Impact",
+          "selector": "div.flagship.how",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "div.flagship.how h2.flagship-title"
+          ]
+        },
+        {
+          "id": "section-events",
+          "name": "Events",
+          "selector": "#events-and-faces-voices",
+          "style": null,
+          "blocks": [
+            "cards",
+            "carousel"
+          ],
+          "defaultContent": [
+            "#events-wrapper a[href*='calendar.buffalo.edu']"
+          ]
+        },
+        {
+          "id": "section-stats",
+          "name": "Statistics",
+          "selector": "#stats-table",
+          "style": "ub-blue",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#stats-table .core-button a"
+          ]
+        },
+        {
+          "id": "section-video",
+          "name": "Video CTA",
+          "selector": "#tlw-video",
+          "style": "ub-blue",
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

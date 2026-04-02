@@ -1,0 +1,5 @@
+mountpoints:
+  /:
+    url: https://admin.da.live/source/aemdemos/summit-buf
+    type: markup
+    suffix: .html
