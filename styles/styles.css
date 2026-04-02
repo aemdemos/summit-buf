@@ -288,6 +288,112 @@ main .section.highlight {
   padding: 40px 0;
 }
 
+/* programs section — "We have your major" default content */
+main > .section.programs > div {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+
+main > .section.programs h2 {
+  font-family: var(--heading-font-family);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  margin-bottom: 24px;
+}
+
+@media (width >= 960px) {
+  main > .section.programs h2 {
+    font-size: 56px;
+  }
+}
+
+/* two-column layout: majors list left, text+buttons right */
+main > .section.programs .programs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
+
+@media (width >= 960px) {
+  main > .section.programs .programs-body {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* left column: majors list */
+main > .section.programs .programs-majors {
+  flex: 0 0 100%;
+}
+
+@media (width >= 960px) {
+  main > .section.programs .programs-majors {
+    flex: 0 0 40%;
+  }
+}
+
+main > .section.programs .programs-majors ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+main > .section.programs .programs-majors li {
+  color: var(--brand-primary);
+  font-size: 20px;
+  padding: 4px 0;
+}
+
+main > .section.programs .programs-majors li.hidden {
+  display: none;
+}
+
+/* right column: text + buttons */
+main > .section.programs .programs-info {
+  flex: 1;
+}
+
+main > .section.programs .programs-info p {
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+main > .section.programs .programs-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (width >= 600px) {
+  main > .section.programs .programs-buttons {
+    flex-direction: row;
+  }
+}
+
+main > .section.programs .programs-buttons a {
+  display: block;
+  flex: 1;
+  background-color: var(--brand-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color var(--transition-duration) var(--transition-easing);
+}
+
+main > .section.programs .programs-buttons a:hover {
+  background-color: var(--brand-secondary);
+  color: #fff;
+  text-decoration: none;
+}
+
 /* focus styles */
 :focus-visible {
   outline: solid 4px #3b99fc;
