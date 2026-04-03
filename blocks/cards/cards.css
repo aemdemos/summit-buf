@@ -1,11 +1,17 @@
 @import url('./cards-tokens.css');
 
+/* full-width: break out of the section max-width container */
+main > .section > .cards-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--cards-grid-min-width), 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--cards-grid-gap);
 }
 
@@ -16,14 +22,63 @@
 
 .cards .cards-card-body {
   margin: var(--cards-card-body-margin);
+  padding: 0 24px 24px;
+}
+
+/* story cards: blue background + hover gradient only when preceded by an image */
+.cards .cards-card-image + .cards-card-body {
+  background-color: var(--brand-primary);
+  background-image: linear-gradient(to right, var(--brand-secondary) 50%, transparent 0);
+  background-size: 200% 100%;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transition: background-position 0.2s linear;
+}
+
+/* hide the category text (first paragraph in card body, only when preceded by an image) */
+.cards .cards-card-image + .cards-card-body > p:first-child {
+  display: none;
+}
+
+.cards .cards-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cards .cards-card-body h3 a {
+  color: #fff;
+  text-decoration: none;
 }
 
 .cards .cards-card-image {
   line-height: 0;
+  overflow: hidden;
 }
 
 .cards > ul > li img {
   width: 100%;
   aspect-ratio: var(--cards-image-aspect-ratio);
   object-fit: var(--cards-image-object-fit);
+  transition: transform 0.2s ease-in;
+  transform: scale(1);
+}
+
+@media (hover: hover) {
+  .cards > ul > li:hover img {
+    transform: scale(1.1);
+  }
+
+  .cards > ul > li:hover .cards-card-image + .cards-card-body {
+    background-position: 0 100%;
+  }
+}
+
+/* mobile: stack cards vertically */
+@media (width < 600px) {
+  .cards > ul {
+    grid-template-columns: 1fr;
+  }
 }
