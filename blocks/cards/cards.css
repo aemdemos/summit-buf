@@ -76,9 +76,21 @@ main > .section > .cards-wrapper {
   }
 }
 
-/* events cards: 2-column layout, first card spans full left column */
+/* events cards: constrained width, 2-column layout */
+.section:has(.cards-featured) {
+  position: relative;
+}
+
+.section:has(.cards-featured) > .cards-wrapper {
+  width: 90dvw;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
 .cards:not(:has(.cards-card-image)) > ul {
   grid-template-columns: 1fr 1fr;
+  min-height: 400px;
 }
 
 /* shared event card elements */
@@ -138,6 +150,7 @@ main > .section > .cards-wrapper {
   flex-direction: column;
   border: 8px solid #2f9fd0;
   padding: 24px;
+  align-self: stretch;
 }
 
 .cards .cards-event-desc {
@@ -158,7 +171,8 @@ main > .section > .cards-wrapper {
 .cards > ul > li.cards-event {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  align-self: start;
+  padding: 6px 16px;
 }
 
 .cards > ul > li.cards-event .cards-event-datebox {
@@ -183,10 +197,16 @@ main > .section > .cards-wrapper {
   font-size: 13px;
 }
 
-/* events section CTA button */
+/* events section CTA button — aligned with datebox left edge, bottom of first column */
 .section:has(.cards-featured) > .default-content-wrapper {
-  text-align: right;
-  padding: 16px 0;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% + 16px);
+  padding: 0;
+}
+
+.section:has(.cards-featured) > .default-content-wrapper p {
+  margin: 0;
 }
 
 .section:has(.cards-featured) > .default-content-wrapper a.button {
