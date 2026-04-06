@@ -33,3 +33,67 @@
     order: unset;
   }
 }
+
+/* stats columns: blue background with geometric pattern, white text, large numbers */
+.section.columns-container {
+  background-color: var(--brand-primary);
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.section.columns-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/styles/geometric-pattern.svg');
+  background-size: 1638px;
+  background-position: center top;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+.section.columns-container > .columns-wrapper {
+  max-width: var(--max-width-site);
+  margin: auto;
+  position: relative;
+}
+
+.section.columns-container .columns > div > div {
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.section.columns-container .columns > div > div strong {
+  display: block;
+  font-size: 58px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+/* CTA button in stats section */
+.section.columns-container > .default-content-wrapper {
+  max-width: var(--max-width-site);
+  margin: auto;
+  text-align: center;
+  padding-top: 32px;
+  position: relative;
+}
+
+.section.columns-container > .default-content-wrapper a.button {
+  background-color: #fff;
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 34px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.section.columns-container > .default-content-wrapper a.button:hover,
+.section.columns-container > .default-content-wrapper a.button:focus {
+  background-color: var(--light-color);
+}

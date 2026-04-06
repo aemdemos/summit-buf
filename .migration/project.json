@@ -1,5 +1,5 @@
 {
-    "libraryUrl": "https://main--ise-boilerplate--aemdemos.aem.page/docs/library/blocks.json",
-    "type": "da",
-    "contentHostUrl": "content.da.live"
-  }
+  "type": "da",
+  "libraryUrl": "https://main--summit-buf--aemdemos.aem.page/docs/library/blocks.json",
+  "contentHostUrl": "https://da.live/#/aemdemos/summit-buf"
+}

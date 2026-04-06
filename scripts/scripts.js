@@ -168,6 +168,87 @@ function buildAutoBlocks(main) {
   }
 }
 
+/**
+ * Decorates the "We have your major" programs section.
+ * Restructures into two-column layout and randomly displays 5 majors.
+ * @param {Element} main The main element
+ */
+function buildProgramsSection(main) {
+  const h2 = main.querySelector('h2#we-have-your-major');
+  if (!h2) return;
+
+  // After decorateSections, structure is: .section > .default-content-wrapper > h2, ul, p, p, p
+  const wrapper = h2.closest('.default-content-wrapper');
+  const section = h2.closest('.section');
+  if (!wrapper || !section) return;
+  section.classList.add('programs');
+
+  // Collect all individual major items from nested lists
+  const outerList = wrapper.querySelector(':scope > ul');
+  if (!outerList) return;
+
+  const allMajors = [...outerList.querySelectorAll('li > ul > li')];
+  if (allMajors.length === 0) return;
+
+  // Build flat vertical list of all majors, hidden by default
+  const majorsList = document.createElement('ul');
+  allMajors.forEach((li) => {
+    const newLi = document.createElement('li');
+    newLi.textContent = li.textContent.trim();
+    newLi.classList.add('hidden');
+    majorsList.appendChild(newLi);
+  });
+
+  // Randomly select 5 to show (non-security context; purely cosmetic)
+  const items = [...majorsList.children];
+  const randomValues = new Uint32Array(items.length);
+  crypto.getRandomValues(randomValues);
+  const shuffled = items
+    .map((item, i) => ({ item, sort: randomValues[i] }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ item }) => item);
+  shuffled.slice(0, 5).forEach((li) => li.classList.remove('hidden'));
+
+  // Collect text paragraphs and button links
+  const textParas = [];
+  const buttonLinks = [];
+  [...wrapper.children].forEach((child) => {
+    if (child === h2 || child === outerList) return;
+    if (child.tagName === 'P' && child.querySelector('a') && !child.querySelector('strong')) {
+      buttonLinks.push(child.querySelector('a'));
+    } else if (child.tagName === 'P') {
+      textParas.push(child);
+    }
+  });
+
+  // Build the two-column body
+  const body = document.createElement('div');
+  body.classList.add('programs-body');
+
+  const leftCol = document.createElement('div');
+  leftCol.classList.add('programs-majors');
+  leftCol.appendChild(majorsList);
+
+  const rightCol = document.createElement('div');
+  rightCol.classList.add('programs-info');
+  textParas.forEach((p) => rightCol.appendChild(p));
+
+  const buttonsRow = document.createElement('div');
+  buttonsRow.classList.add('programs-buttons');
+  buttonLinks.forEach((a) => buttonsRow.appendChild(a));
+  rightCol.appendChild(buttonsRow);
+
+  body.appendChild(leftCol);
+  body.appendChild(rightCol);
+
+  // Remove original list and leftover paragraphs
+  outerList.remove();
+  [...wrapper.querySelectorAll(':scope > p')].forEach((p) => {
+    if (!p.querySelector('strong')) p.remove();
+  });
+  wrapper.appendChild(body);
+}
+
 function a11yLinks(main) {
   const links = main.querySelectorAll('a');
   links.forEach((link) => {
@@ -292,6 +373,7 @@ export function decorateMain(main) {
   decorateBlocks(main);
   decorateButtons(main);
   a11yLinks(main);
+  buildProgramsSection(main);
 }
 
 /**

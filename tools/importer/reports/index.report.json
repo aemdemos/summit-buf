@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.buffalo.edu/",
+  "path": "index",
+  "timestamp": "2026-04-01T23:04:15.228Z",
+  "title": "Welcome to the University at Buffalo - University at Buffalo",
+  "template": "homepage",
+  "blocks": [
+    "carousel",
+    "carousel",
+    "cards",
+    "cards",
+    "columns",
+    "hero"
+  ]
+}
