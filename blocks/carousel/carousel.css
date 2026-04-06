@@ -153,3 +153,145 @@
     --slide-content-width: auto;
   }
 }
+
+/* --- Faces variant --- */
+
+/* break out of section max-width, cap at 1920px */
+main > .section > .carousel-wrapper:has(.carousel-faces) {
+  max-width: 1920px;
+  padding: 0 32px;
+}
+
+.carousel.carousel-faces {
+  min-height: auto;
+}
+
+/* mobile: stack vertically */
+.carousel-faces-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* left column: active circular image */
+.carousel .carousel-faces-image {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+}
+
+.carousel .carousel-faces-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* right column: text + thumbnails */
+.carousel .carousel-faces-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.carousel .carousel-faces-text {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.carousel .carousel-faces-text p:first-child {
+  font-size: 20px;
+  font-style: italic;
+  color: var(--brand-primary);
+  margin-bottom: 8px;
+}
+
+.carousel .carousel-faces-text p:last-child {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* thumbnail row */
+.carousel .carousel-faces-thumbs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.carousel .carousel-faces-thumb {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  overflow: hidden;
+}
+
+.carousel .carousel-faces-thumb img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.carousel .carousel-faces-thumb:hover,
+.carousel .carousel-faces-thumb:focus-visible {
+  border-color: var(--brand-primary);
+}
+
+.carousel .carousel-faces-thumb.active {
+  border-color: var(--brand-primary);
+  opacity: 1;
+}
+
+.carousel .carousel-faces-thumb:not(.active) {
+  opacity: 0.6;
+}
+
+.carousel .carousel-faces-thumb:not(.active):hover {
+  opacity: 1;
+}
+
+/* desktop: two-column grid, thumbs aligned to image bottom */
+@media (width >= 600px) {
+  .carousel-faces-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+
+  .carousel .carousel-faces-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .carousel .carousel-faces-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .carousel .carousel-faces-text {
+    flex: 1;
+  }
+
+  /*
+   * Thumb center aligns with image bottom.
+   * The image is square and fills the left column, so
+   * the content column has the same height. Place thumbs
+   * at the bottom and shift down by half their height.
+   */
+  .carousel .carousel-faces-thumbs {
+    transform: translateY(50%);
+  }
+}
