@@ -36,7 +36,8 @@
 
 /* stats columns: geometric pattern background, white text, large numbers */
 .section.columns-container {
-  min-height: 451px;
+  min-height: 700px;
+  margin-top: 200px;
   padding: 48px 0;
   position: relative;
   overflow: hidden;
@@ -58,7 +59,7 @@
 
 .section.columns-container > .columns-wrapper {
   max-width: var(--max-width-site);
-  margin: auto;
+  margin: 200px auto 0;
   position: relative;
 }
 
