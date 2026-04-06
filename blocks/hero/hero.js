@@ -4,8 +4,8 @@ function buildVideoBackground(block) {
 
   const links = [...imageCol.querySelectorAll('a')];
   const videoUrls = links
-    .map((a) => a.href)
-    .filter((href) => href.endsWith('.mp4'));
+    .map((a) => a.textContent.trim())
+    .filter((url) => url.endsWith('.mp4'));
   if (!videoUrls.length) return;
 
   // Clear the image column and build the video player
