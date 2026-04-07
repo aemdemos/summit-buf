@@ -34,12 +34,16 @@
   }
 }
 
-/* stats columns: blue background with geometric pattern, white text, large numbers */
+/* stats columns: geometric pattern background, white text, large numbers */
 .section.columns-container {
-  background-color: var(--brand-primary);
+  min-height: 700px;
+  margin-top: 200px;
   padding: 48px 0;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section.columns-container::before {
@@ -47,15 +51,15 @@
   position: absolute;
   inset: 0;
   background-image: url('/styles/geometric-pattern.svg');
-  background-size: 1638px;
-  background-position: center top;
+  background-size: 160vw;
+  background-position: calc(50% - 60px) top;
   background-repeat: repeat;
   pointer-events: none;
 }
 
 .section.columns-container > .columns-wrapper {
   max-width: var(--max-width-site);
-  margin: auto;
+  margin: 200px auto 0;
   position: relative;
 }
 
