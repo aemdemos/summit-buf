@@ -133,10 +133,17 @@ function buildMegamenuPanel(subList) {
 
   const items = [...subList.children];
   const featured = items[0];
-  const categories = items.filter((li, i) => i > 0 && !li.classList.contains('also-interested'));
-  const alsoInterested = items.find((li) => li.classList.contains('also-interested'));
-  const regularCats = categories.filter((cat) => !cat.classList.contains('sidebar-card'));
-  const sidebarCats = categories.filter((cat) => cat.classList.contains('sidebar-card'));
+
+  // Detect by class (local) or structure (EDS strips classes)
+  const isAlsoInterested = (li) => li.classList.contains('also-interested')
+    || (!li.querySelector('ul') && li.querySelectorAll('a').length > 1);
+  const isSidebarCard = (li) => li.classList.contains('sidebar-card')
+    || (li.querySelector('ul') && li.querySelector('ul strong'));
+
+  const categories = items.filter((li, i) => i > 0 && !isAlsoInterested(li));
+  const alsoInterested = items.find((li) => isAlsoInterested(li));
+  const regularCats = categories.filter((cat) => !isSidebarCard(cat));
+  const sidebarCats = categories.filter((cat) => isSidebarCard(cat));
   const hasSidebar = sidebarCats.length > 0;
 
   if (hasSidebar) panel.classList.add('has-sidebar');
