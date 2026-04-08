@@ -3,6 +3,11 @@ import { loadFragment } from '../fragment/fragment.js';
 
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+// EDS wraps links in <p> tags; this finds the first <a> whether direct child or in <p>
+function getDirectLink(el) {
+  return el.querySelector(':scope > a') || el.querySelector(':scope > p > a');
+}
+
 function closeAllPanels(nav) {
   nav.querySelectorAll('.nav-megamenu-panel').forEach((p) => {
     p.setAttribute('aria-hidden', 'true');
@@ -63,7 +68,7 @@ function buildFeaturedColumn(featured) {
 function buildCategoryColumn(cat) {
   const col = document.createElement('div');
   col.className = 'megamenu-column';
-  const catHeading = cat.querySelector(':scope > a');
+  const catHeading = getDirectLink(cat);
   if (catHeading) {
     const h3 = document.createElement('h3');
     h3.className = 'megamenu-category-heading';
@@ -138,7 +143,7 @@ function buildMegamenuPanel(subList) {
 
   // Panel header (the blue title link) — always at top
   if (featured) {
-    const headerLink = featured.querySelector(':scope > a');
+    const headerLink = getDirectLink(featured);
     if (headerLink) {
       const h = document.createElement('div');
       h.className = 'megamenu-header';
@@ -175,7 +180,7 @@ function buildMegamenuPanel(subList) {
   sidebarCats.forEach((cat) => {
     const card = document.createElement('div');
     card.className = 'megamenu-sidebar-card';
-    const catHeading = cat.querySelector(':scope > a');
+    const catHeading = getDirectLink(cat);
     if (catHeading) {
       const header = document.createElement('div');
       header.className = 'megamenu-sidebar-header';
@@ -232,7 +237,7 @@ function buildMegamenuPanel(subList) {
 
 function buildInfoForDropdown(toolsUl) {
   const infoForLi = [...toolsUl.children].find((li) => {
-    const a = li.querySelector(':scope > a');
+    const a = getDirectLink(li);
     return a && a.textContent.trim() === 'Info For';
   });
   if (!infoForLi) return null;
@@ -324,7 +329,7 @@ export default async function decorate(block) {
       const navItemsContainer = document.createElement('div');
       navItemsContainer.className = 'nav-items';
       [...sectionsList.children].forEach((li) => {
-        const topLink = li.querySelector(':scope > a');
+        const topLink = getDirectLink(li);
         const subList = li.querySelector(':scope > ul');
         const navItem = document.createElement('div');
         navItem.className = 'nav-item';
@@ -452,7 +457,7 @@ export default async function decorate(block) {
       const ctaContainer = document.createElement('div');
       ctaContainer.className = 'nav-cta-buttons';
       [...toolsUl.children].forEach((li) => {
-        const a = li.querySelector(':scope > a');
+        const a = getDirectLink(li);
         if (a && a.textContent.trim() !== 'Info For' && !li.querySelector('ul')) {
           const ctaLink = a.cloneNode(true);
           ctaLink.className = 'nav-cta';
