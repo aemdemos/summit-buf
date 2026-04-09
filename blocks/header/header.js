@@ -317,6 +317,9 @@ function buildLogoRibbon(nav, navWrapper) {
   subtitle.append('of New York');
   ribbonLink.append(subtitle);
   ribbon.append(ribbonLink);
+  const tail = document.createElement('div');
+  tail.className = 'ribbon-tail';
+  ribbon.append(tail);
   navWrapper.append(ribbon);
 }
 
