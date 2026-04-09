@@ -317,8 +317,9 @@ header .nav-search {
   order: 7;
 }
 
+/* Search toggle — red icon on white circle (inactive), blue bg + white icon (hover) */
 header .nav-search-toggle {
-  background: var(--search-icon-bg);
+  background: #fff;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -327,69 +328,92 @@ header .nav-search-toggle {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
+  padding: 0;
+  transition: background-color 0.2s ease;
 }
 
-header .nav-search-toggle .icon-search,
-header .nav-search-panel .icon-search {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 2px solid currentcolor;
-  border-radius: 50%;
-  position: relative;
+header .nav-search-toggle .icon-search {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23da3c28' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
+header .nav-search-toggle:hover {
+  background: var(--logo-ribbon-bg);
+}
+
+header .nav-search-toggle:hover .icon-search,
+header .nav-search-toggle[aria-expanded='true'] .icon-search {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E");
+}
+
+header .nav-search-toggle[aria-expanded='true'] {
+  background: var(--logo-ribbon-bg);
+}
+
+/* Remove old CSS-drawn icon styles */
 header .nav-search-toggle .icon-search::after,
 header .nav-search-panel .icon-search::after {
-  content: '';
-  display: block;
-  width: 2px;
-  height: 7px;
-  background: currentcolor;
-  position: absolute;
-  bottom: -6px;
-  right: -2px;
-  transform: rotate(-45deg);
+  display: none;
 }
 
+/* Search panel — full viewport width, red underline */
 header .nav-search-panel[aria-hidden='true'] {
   display: none;
 }
 
 header .nav-search-panel[aria-hidden='false'] {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: var(--nav-height);
+  left: 0;
   right: 0;
   background: #fff;
-  padding: 12px 16px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  padding: 16px 80px 16px 240px;
+  border-bottom: 3px solid var(--cta-bg);
   z-index: 60;
 }
 
 header .nav-search-panel form {
   display: flex;
-  gap: 8px;
+  width: 100%;
+  align-items: center;
+  position: relative;
 }
 
 header .nav-search-panel input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 14px;
-  width: 200px;
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  padding: 8px 40px 8px 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+header .nav-search-panel input:focus {
+  border-bottom-color: var(--cta-bg);
 }
 
 header .nav-search-panel button[type='submit'] {
-  background: var(--nav-bg);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
   border: none;
-  border-radius: 4px;
-  padding: 6px 10px;
   cursor: pointer;
-  color: #fff;
+  padding: 4px;
   display: flex;
   align-items: center;
+}
+
+header .nav-search-panel .icon-search {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23da3c28' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
 /* ============================================================
@@ -412,25 +436,36 @@ header .nav-info-for-trigger {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 0 16px;
+  line-height: var(--nav-height);
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
+header .nav-info-for-trigger:hover,
+header .nav-info-for-trigger[aria-expanded='true'] {
+  background: #fff;
+  color: #666;
+}
+
 header .nav-info-for-trigger::after {
   content: '';
   display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid currentcolor;
-  transition: transform 0.2s ease;
+  width: 20px;
+  height: 20px;
+  background: var(--cta-bg);
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+  transition: background-color 0.2s ease;
 }
 
+header .nav-info-for-trigger:hover::after,
 header .nav-info-for-trigger[aria-expanded='true']::after {
-  transform: rotate(180deg);
+  background-color: var(--nav-bg);
 }
 
 header .nav-info-for-dropdown[aria-hidden='true'] {
@@ -442,10 +477,11 @@ header .nav-info-for-dropdown[aria-hidden='false'] {
   position: absolute;
   top: 100%;
   right: 0;
-  background: var(--info-for-dropdown-bg);
-  min-width: 200px;
+  background: #fff;
+  min-width: 220px;
   padding: 8px 0;
   z-index: 60;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
 }
 
 header .nav-info-for-dropdown ul {
@@ -455,15 +491,26 @@ header .nav-info-for-dropdown ul {
 }
 
 header .nav-info-for-dropdown li a {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 8px 20px;
-  color: #fff;
+  color: var(--megamenu-link-color);
   font-size: 14px;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+header .nav-info-for-dropdown li a::after {
+  content: '\203A';
+  color: var(--nav-bg);
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 12px;
 }
 
 header .nav-info-for-dropdown li a:hover {
-  background: rgb(255 255 255 / 10%);
+  background: #f5f5f5;
 }
 
 /* CTA buttons (Apply, Give) */
@@ -557,7 +604,10 @@ header .nav-cta:hover {
 
   header .nav-item.active .nav-item-link,
   header .nav-item-link:hover {
-    border-bottom-color: var(--nav-hover-underline);
+    background: #fff;
+    color: #666;
+    border-bottom-color: transparent;
+    text-decoration: none;
   }
 
   /* Hide mobile chevron on desktop */
