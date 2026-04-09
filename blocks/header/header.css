@@ -515,6 +515,11 @@ header .nav-cta:hover {
     left: 80px;
   }
 
+  /* Hide nav-brand on desktop — ribbon replaces it */
+  header .nav-brand {
+    display: none;
+  }
+
   header nav {
     gap: 16px;
     padding: 0 80px 0 240px;
