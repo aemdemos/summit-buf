@@ -334,9 +334,9 @@ header .nav-search-toggle {
 
 header .nav-search-toggle .icon-search {
   display: block;
-  width: 20px;
-  height: 20px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23da3c28' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat center / contain;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23da3c28' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cline x1='13' y1='13' x2='18.5' y2='18.5'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
 header .nav-search-toggle:hover {
@@ -345,7 +345,7 @@ header .nav-search-toggle:hover {
 
 header .nav-search-toggle:hover .icon-search,
 header .nav-search-toggle[aria-expanded='true'] .icon-search {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cline x1='13' y1='13' x2='18.5' y2='18.5'/%3E%3C/svg%3E");
 }
 
 header .nav-search-toggle[aria-expanded='true'] {
@@ -358,7 +358,7 @@ header .nav-search-panel .icon-search::after {
   display: none;
 }
 
-/* Search panel — full viewport width, red underline */
+/* Search panel — full viewport width, red underline on input */
 header .nav-search-panel[aria-hidden='true'] {
   display: none;
 }
@@ -369,9 +369,11 @@ header .nav-search-panel[aria-hidden='false'] {
   top: var(--nav-height);
   left: 0;
   right: 0;
+  width: 100vw;
   background: #fff;
-  padding: 16px 80px 16px 240px;
-  border-bottom: 3px solid var(--cta-bg);
+  padding: 20px 80px 20px 240px;
+  border-bottom: none;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
   z-index: 60;
 }
 
@@ -385,11 +387,12 @@ header .nav-search-panel form {
 header .nav-search-panel input {
   flex: 1;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid var(--cta-bg);
   border-radius: 0;
-  padding: 8px 40px 8px 4px;
+  padding: 8px 44px 8px 4px;
   font-size: 16px;
   outline: none;
+  background: transparent;
 }
 
 header .nav-search-panel input:focus {
@@ -413,7 +416,7 @@ header .nav-search-panel .icon-search {
   display: block;
   width: 22px;
   height: 22px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23da3c28' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='7'/%3E%3Cline x1='15' y1='15' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat center / contain;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23da3c28' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cline x1='13' y1='13' x2='18.5' y2='18.5'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
 /* ============================================================
@@ -916,16 +919,30 @@ header .nav-cta:hover {
   header .nav-search {
     display: flex;
     align-items: center;
+    align-self: stretch;
     order: 7;
     margin-left: auto;
+    padding: 0 15px;
+    transition: background-color 0.2s ease;
+  }
+
+  header .nav-search:hover {
+    background: #fff;
   }
 
   /* Show tools */
   header .nav-tools {
     display: flex;
     align-items: center;
+    align-self: stretch;
     gap: 16px;
     order: 8;
+  }
+
+  header .nav-info-for {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -969,6 +986,7 @@ header nav[aria-expanded='true'] .nav-search .nav-search-panel[aria-hidden='fals
   position: static;
   background: none;
   box-shadow: none;
+  border-bottom: none;
   padding: 0;
   width: 100%;
 }
