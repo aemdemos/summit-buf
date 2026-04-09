@@ -295,6 +295,47 @@ function buildInfoForDropdown(toolsUl) {
   return wrapper;
 }
 
+function buildLogoRibbon(nav, navWrapper) {
+  const brandSection = nav.querySelector('.nav-brand');
+  if (!brandSection) return;
+  const brandImg = brandSection.querySelector('img');
+  const brandLink = brandSection.querySelector('a');
+  const ribbon = document.createElement('div');
+  ribbon.className = 'nav-ribbon';
+  const ribbonLink = document.createElement('a');
+  ribbonLink.href = brandLink ? brandLink.href : '/';
+  ribbonLink.setAttribute('aria-label', 'University at Buffalo');
+  if (brandImg) {
+    const logoImg = brandImg.cloneNode(true);
+    logoImg.className = 'ribbon-logo';
+    ribbonLink.append(logoImg);
+  }
+  const subtitle = document.createElement('div');
+  subtitle.className = 'ribbon-subtitle';
+  subtitle.append('The State University');
+  subtitle.append(document.createElement('br'));
+  subtitle.append('of New York');
+  ribbonLink.append(subtitle);
+  ribbon.append(ribbonLink);
+  navWrapper.append(ribbon);
+}
+
+function setupScrollBehavior(navWrapper, spacer) {
+  if (!isDesktop.matches) return;
+  const onScroll = () => {
+    const scrolled = window.scrollY > 50;
+    navWrapper.classList.toggle('scrolled', scrolled);
+    spacer.classList.toggle('active', scrolled);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  isDesktop.addEventListener('change', () => {
+    if (!isDesktop.matches) {
+      navWrapper.classList.remove('scrolled');
+      spacer.classList.remove('active');
+    }
+  });
+}
+
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
@@ -495,7 +536,18 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
+
+  // Build the logo ribbon (extends below the nav bar)
+  buildLogoRibbon(nav, navWrapper);
+
+  // Spacer to prevent content jump when header becomes sticky
+  const spacer = document.createElement('div');
+  spacer.className = 'nav-spacer';
   block.append(navWrapper);
+  block.append(spacer);
+
+  // Scroll handler — toggle sticky header + ribbon collapse
+  setupScrollBehavior(navWrapper, spacer);
 
   // Initialize
   toggleMenu(nav, isDesktop.matches);
