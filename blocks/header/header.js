@@ -137,8 +137,18 @@ function buildMegamenuPanel(subList) {
   // Detect by class (local) or structure (EDS strips classes)
   const isAlsoInterested = (li) => li.classList.contains('also-interested')
     || (!li.querySelector('ul') && li.querySelectorAll('a').length > 1);
-  const isSidebarCard = (li) => li.classList.contains('sidebar-card')
-    || (li.querySelector('ul') && li.querySelector('ul strong'));
+  const isSidebarCard = (li) => {
+    if (li.classList.contains('sidebar-card')) return true;
+    const subUl = li.querySelector('ul');
+    if (!subUl) return false;
+    // Sidebar if sub-list has <strong> labels (Research) or plain-text <li> items (Admissions)
+    if (subUl.querySelector('strong')) return true;
+    const subItems = [...subUl.children];
+    const plainTextItems = subItems.filter(
+      (child) => !child.querySelector('a') && !child.querySelector('ul') && child.textContent.trim().length > 30,
+    );
+    return plainTextItems.length > 0;
+  };
 
   const categories = items.filter((li, i) => i > 0 && !isAlsoInterested(li));
   const alsoInterested = items.find((li) => isAlsoInterested(li));
