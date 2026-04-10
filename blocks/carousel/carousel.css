@@ -10,6 +10,10 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   padding: 0;
 }
 
+.carousel:not(.carousel-faces) {
+  position: relative;
+}
+
 .carousel .carousel-slides-container {
   position: relative;
 }
@@ -22,10 +26,12 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
 }
 
 /* Fade-based slides: stacked, opacity-toggled */
+
+/* Height accounts for 50px offset + 30px for nav buttons overlapping below */
 .carousel .carousel-slides {
   position: relative;
   width: 100%;
-  height: calc(100dvh - 50px);
+  height: calc(100dvh - 80px);
   overflow: hidden;
 }
 
@@ -76,7 +82,7 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
 }
 
 .carousel .carousel-slide .carousel-slide-content p {
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: 9dvw;
   font-weight: 700;
   line-height: 1.15;
   color: #fff;
@@ -116,15 +122,16 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   background-color: var(--carousel-indicator-active-background);
 }
 
-/* Navigation bar: below the image, centered row of prev / pause / next */
+/* Navigation bar: overlapping the bottom edge of the image */
 .carousel .carousel-navigation-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--carousel-nav-gap);
-  padding: 8px 0;
+  padding: 0;
+  margin-top: -22px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -216,6 +223,33 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
 
 .carousel .carousel-navigation-buttons button.slide-toggle-play.paused::after {
   display: none;
+}
+
+/* Responsive caption font sizes matching source */
+@media (width >= 600px) {
+  .carousel .carousel-slide .carousel-slide-content p {
+    font-size: 7vmin;
+  }
+
+  .carousel .carousel-slide .carousel-slide-content {
+    max-width: 72dvw;
+  }
+}
+
+@media (width >= 900px) {
+  .carousel .carousel-slide .carousel-slide-content p {
+    font-size: 3.3rem;
+  }
+
+  .carousel .carousel-slide .carousel-slide-content {
+    max-width: 832px;
+  }
+}
+
+@media (width >= 1200px) {
+  .carousel .carousel-slide .carousel-slide-content p {
+    font-size: 4.5rem;
+  }
 }
 
 /* --- Faces variant (unchanged) --- */
