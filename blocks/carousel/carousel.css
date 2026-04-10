@@ -1,5 +1,7 @@
 @import url('./carousel-tokens.css');
 
+/* --- Main carousel (fade variant matching source slideshow) --- */
+
 .carousel .carousel-slides-container {
   position: relative;
 }
@@ -11,35 +13,35 @@
   padding: 0;
 }
 
+/* Fade-based slides: stacked, opacity-toggled */
 .carousel .carousel-slides {
-  display: flex;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  overflow: scroll clip;
-}
-
-.carousel .carousel-slides::-webkit-scrollbar {
-  display: none;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.8%; /* ~16:9 aspect ratio matching source */
+  overflow: hidden;
 }
 
 .carousel .carousel-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--carousel-transition-duration) ease;
+  pointer-events: none;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  min-height: min(50vw, calc(100dvh - var(--header-height)));
-}
-
-.carousel .carousel-slide:has(.carousel-slide-content[data-align='center']) {
   align-items: center;
+  justify-content: center;
 }
 
-.carousel .carousel-slide:has(.carousel-slide-content[data-align='right']) {
-  align-items: flex-end;
+.carousel .carousel-slide[aria-hidden='false'] {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Background image fills the slide */
+.carousel .carousel-slide .carousel-slide-image {
+  position: absolute;
+  inset: 0;
 }
 
 .carousel .carousel-slide .carousel-slide-image picture {
@@ -53,23 +55,37 @@
   object-fit: cover;
 }
 
+/* Caption text: centered on image, large bold white with text-shadow */
 .carousel .carousel-slide .carousel-slide-content {
   z-index: 1;
-  margin: var(--carousel-content-margin);
-  padding: var(--carousel-content-padding);
-  color: white;
-  background-color: var(--carousel-content-background);
   position: relative;
-  width: var(--slide-content-width, auto);
+  text-align: center;
+  padding: var(--carousel-content-padding);
+  background-color: var(--carousel-content-background);
+  color: #fff;
+  max-width: 700px;
 }
 
+.carousel .carousel-slide .carousel-slide-content p {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: rgb(0 0 0 / 60%) 0 0 10px;
+  margin: 0;
+}
+
+/* Dot indicators: overlaid inside the image area, near bottom */
 .carousel .carousel-slide-indicators {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: var(--carousel-indicators-gap);
   padding: var(--carousel-indicators-padding);
-  background-color: var(--light-color);
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  z-index: 2;
   line-height: 0;
 }
 
@@ -79,8 +95,10 @@
   margin: 0;
   padding: 0;
   border-radius: 50%;
+  border: none;
   background-color: var(--carousel-indicator-background);
-  transition: background-color var(--carousel-transition-duration);
+  transition: background-color 0.2s;
+  cursor: pointer;
 }
 
 .carousel .carousel-slide-indicator button:disabled,
@@ -89,16 +107,15 @@
   background-color: var(--carousel-indicator-active-background);
 }
 
+/* Navigation bar: below the image, centered row of prev / pause / next */
 .carousel .carousel-navigation-buttons {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: var(--carousel-nav-inset);
-  right: var(--carousel-nav-inset);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  z-index: 1;
+  justify-content: center;
+  gap: var(--carousel-nav-gap);
+  padding: 8px 0;
+  position: relative;
+  z-index: 2;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -108,9 +125,13 @@
   height: var(--carousel-nav-button-size);
   margin: 0;
   border-radius: 50%;
+  border: none;
   padding: 0;
   background-color: var(--carousel-nav-button-background);
-  transition: background-color var(--carousel-transition-duration);
+  box-shadow: rgb(0 0 0 / 60%) 0 0 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: var(--carousel-nav-button-icon-color);
 }
 
 .carousel .carousel-navigation-buttons button:hover,
@@ -118,45 +139,78 @@
   background-color: var(--carousel-nav-button-hover-background);
 }
 
-.carousel .carousel-navigation-buttons button::after {
+/* Prev arrow */
+.carousel .carousel-navigation-buttons button.slide-prev::after {
   display: block;
   content: '';
-  border: 2px solid;
+  border: 3px solid var(--carousel-nav-button-icon-color);
   border-bottom: 0;
-  border-left: 0;
-  height: 12px;
-  width: 12px;
+  border-right: 0;
+  height: 10px;
+  width: 10px;
   position: absolute;
   top: 50%;
   left: calc(50% + 2px);
-  transform: translate(-50%, -50%) rotate(-135deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+/* Next arrow */
 .carousel .carousel-navigation-buttons button.slide-next::after {
-  transform: translate(-50%, -50%) rotate(45deg);
+  display: block;
+  content: '';
+  border: 3px solid var(--carousel-nav-button-icon-color);
+  border-bottom: 0;
+  border-left: 0;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 50%;
   left: calc(50% - 2px);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
-@media (width >= 600px) {
-  .carousel .carousel-navigation-buttons {
-    left: var(--carousel-nav-inset-desktop);
-    right: var(--carousel-nav-inset-desktop);
-  }
-
-  .carousel .carousel-slide .carousel-slide-content {
-    --slide-content-width: calc((100% - 184px) / 2);
-
-    margin: var(--carousel-content-margin-desktop);
-  }
-
-  .carousel .carousel-slide .carousel-slide-content[data-align='justify'] {
-    --slide-content-width: auto;
-  }
+/* Pause / Play button */
+.carousel .carousel-navigation-buttons button.slide-toggle-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* --- Faces variant --- */
+/* Pause icon: two vertical bars */
+.carousel .carousel-navigation-buttons button.slide-toggle-play::before,
+.carousel .carousel-navigation-buttons button.slide-toggle-play::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 16px;
+  background-color: var(--carousel-nav-button-icon-color);
+  border: none;
+  position: static;
+  transform: none;
+}
 
-/* break out of section max-width, cap at 1920px */
+.carousel .carousel-navigation-buttons button.slide-toggle-play::before {
+  margin-right: 4px;
+}
+
+/* Play icon: triangle (when paused) */
+.carousel .carousel-navigation-buttons button.slide-toggle-play.paused::before {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border-style: solid;
+  border-width: 9px 0 9px 16px;
+  border-color: transparent transparent transparent var(--carousel-nav-button-icon-color);
+  margin-right: 0;
+  margin-left: 2px;
+}
+
+.carousel .carousel-navigation-buttons button.slide-toggle-play.paused::after {
+  display: none;
+}
+
+/* --- Faces variant (unchanged) --- */
+
 main > .section > .carousel-wrapper:has(.carousel-faces) {
   max-width: 1920px;
   padding: 0 32px;
@@ -166,7 +220,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   min-height: auto;
 }
 
-/* mobile: stack vertically */
 .carousel-faces-layout {
   display: flex;
   flex-direction: column;
@@ -174,7 +227,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   gap: 24px;
 }
 
-/* left column: active circular image */
 .carousel .carousel-faces-image {
   flex-shrink: 0;
   width: 200px;
@@ -188,7 +240,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   object-fit: cover;
 }
 
-/* right column: text + thumbnails */
 .carousel .carousel-faces-content {
   flex: 1;
   min-width: 0;
@@ -216,7 +267,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   margin-bottom: 0;
 }
 
-/* thumbnail row */
 .carousel .carousel-faces-thumbs {
   display: flex;
   gap: 12px;
@@ -260,7 +310,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   opacity: 1;
 }
 
-/* desktop: two-column grid, thumbs aligned to image bottom */
 @media (width >= 600px) {
   .carousel-faces-layout {
     display: grid;
@@ -285,12 +334,6 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
     flex: 1;
   }
 
-  /*
-   * Thumb center aligns with image bottom.
-   * The image is square and fills the left column, so
-   * the content column has the same height. Place thumbs
-   * at the bottom and shift down by half their height.
-   */
   .carousel .carousel-faces-thumbs {
     transform: translateY(50%);
   }
