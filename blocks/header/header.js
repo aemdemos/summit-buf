@@ -482,15 +482,12 @@ export default async function decorate(block) {
     searchPanel.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
     if (!isOpen) searchInput.focus();
   });
-  searchWrapper.addEventListener('mouseenter', () => {
-    if (!isDesktop.matches) return;
-    searchToggleBtn.setAttribute('aria-expanded', 'true');
-    searchPanel.setAttribute('aria-hidden', 'false');
-  });
-  searchWrapper.addEventListener('mouseleave', () => {
-    if (!isDesktop.matches) return;
-    searchToggleBtn.setAttribute('aria-expanded', 'false');
-    searchPanel.setAttribute('aria-hidden', 'true');
+  document.addEventListener('click', (e) => {
+    if (!searchWrapper.contains(e.target)
+      && searchToggleBtn.getAttribute('aria-expanded') === 'true') {
+      searchToggleBtn.setAttribute('aria-expanded', 'false');
+      searchPanel.setAttribute('aria-hidden', 'true');
+    }
   });
   nav.append(searchWrapper);
 
