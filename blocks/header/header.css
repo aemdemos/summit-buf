@@ -379,13 +379,13 @@ header .nav-search-panel[aria-hidden='false'] {
 
 header .nav-search-panel form {
   display: flex;
-  width: 100%;
+  width: fit-content;
   align-items: center;
   position: relative;
 }
 
 header .nav-search-panel input {
-  flex: 1;
+  width: 100%;
   border: none;
   border-bottom: 2px solid var(--cta-bg);
   border-radius: 0;
@@ -402,8 +402,7 @@ header .nav-search-panel input:focus {
 header .nav-search-panel button[type='submit'] {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 2px;
   background: none;
   border: none;
   cursor: pointer;
@@ -944,6 +943,10 @@ header .nav-cta:hover {
     display: flex;
     align-items: center;
   }
+
+  header .nav-search-panel input {
+    width: 556px;
+  }
 }
 
 /* ============================================================
@@ -955,6 +958,12 @@ header .nav-cta:hover {
   }
 
   /* Layout B image width is controlled by grid column (200px) */
+}
+
+@media (width >= 1280px) {
+  header .nav-search-panel input {
+    width: 900px;
+  }
 }
 
 /* ============================================================
