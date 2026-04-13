@@ -1,14 +1,12 @@
 /* add global styles that can be loaded post LCP here */
 
-/* Ink-splat decoration spanning the events + faces sections */
-main > .section.events-faces-bg,
-main > .section.carousel-container:has(.carousel-faces) {
+/* Ink-splat decoration on the faces carousel section, overflowing upward into events */
+main > .section:has(.carousel-faces) {
   position: relative;
   overflow: visible;
 }
 
-/* The ::before lives on the events section and extends through faces below */
-main > .section.events-faces-bg::before {
+main > .section:has(.carousel-faces)::before {
   content: '';
   position: absolute;
   top: -21.5dvw;
@@ -23,13 +21,8 @@ main > .section.events-faces-bg::before {
   pointer-events: none;
 }
 
-main > .section.events-faces-bg > * {
-  position: relative;
-  z-index: 1;
-}
-
 @media (width >= 900px) {
-  main > .section.events-faces-bg::before {
+  main > .section:has(.carousel-faces)::before {
     background-size: 2200px;
     top: -400px;
     width: 50%;
@@ -37,7 +30,7 @@ main > .section.events-faces-bg > * {
 }
 
 @media (width < 600px) {
-  main > .section.events-faces-bg::before {
+  main > .section:has(.carousel-faces)::before {
     width: 92.5vw;
     background-size: 303vw;
     top: 3vw;
