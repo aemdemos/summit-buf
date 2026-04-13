@@ -273,6 +273,8 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   flex-shrink: 0;
   width: 200px;
   height: 200px;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .carousel .carousel-faces-image img {
