@@ -21,12 +21,12 @@ footer .footer .footer-columns::after {
   content: '';
   display: block;
   position: absolute;
-  right: 0;
+  right: calc(-1 * (100vw - 100%) / 2);
   top: 0;
-  width: 50%;
+  width: calc(50% + (100vw - 100%) / 2);
   height: 100%;
-  background: var(--footer-map-bg) center / cover no-repeat;
-  opacity: 0.25;
+  background: var(--footer-map-bg) 50% 35% / 150% no-repeat;
+  box-shadow: 100px 100px 100px inset #005bbb, 50px 50px 50px inset #005bbb;
   pointer-events: none;
   z-index: 0;
 }
