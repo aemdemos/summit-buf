@@ -75,11 +75,14 @@ export default async function decorate(block) {
       column.append(...section.childNodes);
       decorateSocialIcons(column);
 
-      // Extract decorative map image and set as columns background
-      const mapImg = column.querySelector('img[src*="map"][alt=""]');
-      if (mapImg) {
-        linkColumnsSection.style.setProperty('--footer-map-bg', `url("${mapImg.src}")`);
-        mapImg.closest('p')?.remove();
+      // Extract decorative background image (picture or img with empty alt inside a p)
+      const decorativeImg = column.querySelector('p > picture img[alt=""], p > img[alt=""]');
+      if (decorativeImg) {
+        const src = decorativeImg.currentSrc || decorativeImg.src;
+        if (src) {
+          linkColumnsSection.style.setProperty('--footer-map-bg', `url("${src}")`);
+        }
+        decorativeImg.closest('p')?.remove();
       }
 
       linkColumnsSection.appendChild(column);
