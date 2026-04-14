@@ -1,22 +1,206 @@
-@import url('./footer-tokens.css');
-
+/* Footer block — UB Buffalo */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: var(--primary-color, #005bbb);
+  color: #fff;
+  font-family: var(--body-font-family, Sofia, Arial, sans-serif);
+  font-size: 17px;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: var(--footer-max-width);
-  padding: var(--footer-padding);
+/* ---- Link Columns ---- */
+footer .footer .footer-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1256px;
+  margin: 0 auto;
+  padding: 60px 24px 0;
+  position: relative;
 }
 
-footer .footer p {
-  margin: 0;
+footer .footer .footer-columns::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: url('/content/images/footer_map.jpg') center / cover no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
 }
 
+footer .footer .footer-column {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headings */
+footer .footer .footer-column h2 {
+  font-family: var(--body-font-family, Sofia, Arial, sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color, #ffd86c);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+footer .footer .footer-column h2 + h2 {
+  margin-top: 24px;
+}
+
+footer .footer .footer-column h2 a {
+  color: var(--accent-color, #ffd86c);
+  text-decoration: none;
+}
+
+/* Lists */
+footer .footer .footer-column ul {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+footer .footer .footer-column li {
+  padding: 2px 0 2px 18px;
+  position: relative;
+  line-height: 1.5;
+}
+
+footer .footer .footer-column li::before {
+  content: '\203A';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Links */
+footer .footer .footer-column a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .footer .footer-column a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Social Icons ---- */
+footer .footer .footer-social-icons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+footer .footer .footer-social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: var(--primary-color, #005bbb);
+  transition: opacity 0.2s;
+}
+
+footer .footer .footer-social-icons a:hover {
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+footer .footer .footer-social-icons .icon {
+  width: 24px;
+  height: 24px;
+}
+
+footer .footer .footer-social-icons .icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentcolor;
+}
+
+/* ---- Dashed Separator ---- */
+footer .footer .footer-columns + .footer-bottom {
+  border-top: none;
+  background-image: linear-gradient(to right, #fff 50%, transparent 0%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+}
+
+/* ---- Bottom Bar ---- */
+footer .footer .footer-bottom {
+  max-width: 1256px;
+  margin: 64px auto 0;
+  padding: 24px 24px 16px;
+}
+
+footer .footer .footer-bottom p {
+  margin: 0 0 12px;
+}
+
+footer .footer .footer-bottom img {
+  max-width: 318px;
+  height: auto;
+}
+
+footer .footer .footer-bottom a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .footer .footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Contact button */
+footer .footer .footer-contact-btn {
+  display: inline-block;
+  background-color: var(--red-color, #da3c28);
+  color: #fff;
+  border: 1px solid rgba(255 255 255 / 50%);
+  border-radius: 5px;
+  padding: 13px 19px;
+  font-size: 17.6px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+footer .footer .footer-contact-btn:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+/* Copyright */
+footer .footer .footer-copyright {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 16px;
+}
+
+/* ---- Desktop (900px+) ---- */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: var(--footer-padding-desktop);
+  footer .footer .footer-columns {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 60px 0 0;
+  }
+
+  footer .footer .footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 24px 0 16px;
+  }
+
+  footer .footer .footer-bottom .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: right;
   }
 }
