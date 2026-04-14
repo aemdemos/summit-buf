@@ -1,1 +1,44 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Ink-splat decoration on the faces carousel section, overflowing upward into events */
+main > .section:has(.carousel-faces) {
+  position: relative;
+  overflow: visible;
+}
+
+main > .section:has(.carousel-faces) > * {
+  position: relative;
+  z-index: 1;
+}
+
+main > .section:has(.carousel-faces)::before {
+  content: '';
+  position: absolute;
+  top: -21.5dvw;
+  left: 0;
+  bottom: 0;
+  width: 55%;
+  z-index: 0;
+  background-image: url('/icons/ink-splat-dot.svg');
+  background-size: 117dvw;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+@media (width >= 900px) {
+  main > .section:has(.carousel-faces)::before {
+    background-size: 2200px;
+    top: -400px;
+    width: 50%;
+  }
+}
+
+@media (width < 600px) {
+  main > .section:has(.carousel-faces)::before {
+    width: 92.5vw;
+    background-size: 303vw;
+    top: 3vw;
+  }
+}

@@ -1,13 +1,60 @@
 import { moveInstrumentation, getBlockId } from '../../scripts/scripts.js';
-import { createSliderControls, initSlider, showSlide } from '../../scripts/slider.js';
+import { createSliderControls } from '../../scripts/slider.js';
+
+const AUTO_ADVANCE_MS = 6000;
+
+/**
+ * Fade-aware showSlide: toggles aria-hidden/opacity instead of scrolling.
+ */
+function showSlide(block, slideIndex) {
+  const slides = block.querySelectorAll('.carousel-slide');
+  if (!slides.length) return;
+
+  let idx = slideIndex % slides.length;
+  if (idx < 0) idx += slides.length;
+
+  block.dataset.activeSlide = String(idx);
+
+  slides.forEach((slide, i) => {
+    slide.setAttribute('aria-hidden', String(i !== idx));
+    slide.querySelectorAll('a').forEach((link) => {
+      if (i !== idx) link.setAttribute('tabindex', '-1');
+      else link.removeAttribute('tabindex');
+    });
+  });
+
+  const indicators = block.querySelectorAll('.carousel-slide-indicator');
+  indicators.forEach((indicator, i) => {
+    const btn = indicator.querySelector('button');
+    if (!btn) return;
+    if (i === idx) btn.setAttribute('disabled', 'true');
+    else btn.removeAttribute('disabled');
+  });
+}
 
 export { showSlide };
+
+function stopAutoAdvance(block) {
+  if (block.autoAdvanceTimer) {
+    clearInterval(block.autoAdvanceTimer);
+    block.autoAdvanceTimer = null;
+  }
+}
+
+function startAutoAdvance(block) {
+  stopAutoAdvance(block);
+  block.autoAdvanceTimer = setInterval(() => {
+    const current = parseInt(block.dataset.activeSlide, 10) || 0;
+    showSlide(block, current + 1);
+  }, AUTO_ADVANCE_MS);
+}
 
 function createSlide(row, slideIndex, carouselId) {
   const slide = document.createElement('li');
   slide.dataset.slideIndex = slideIndex;
   slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
   slide.classList.add('carousel-slide');
+  slide.setAttribute('aria-hidden', slideIndex === 0 ? 'false' : 'true');
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
     column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
@@ -75,7 +122,6 @@ function decorateFaces(block, blockId, rows) {
   const thumbRow = document.createElement('div');
   thumbRow.className = 'carousel-faces-thumbs';
 
-  // Store content as DOM nodes to avoid innerHTML/XSS
   block.facesImages = [];
   block.facesContentEls = [];
 
@@ -135,14 +181,34 @@ export default async function decorate(block) {
 
   const slidesWrapper = document.createElement('ul');
   slidesWrapper.classList.add('carousel-slides');
-  slidesWrapper.setAttribute('tabindex', '0');
   slidesWrapper.setAttribute('aria-label', 'Carousel slides');
-  block.prepend(slidesWrapper);
 
   if (!isSingleSlide) {
     const { indicatorsNav, buttonsContainer } = createSliderControls(rows.length);
-    block.append(indicatorsNav);
-    container.append(buttonsContainer);
+
+    // Add pause/play button between prev and next
+    const pauseBtn = document.createElement('button');
+    pauseBtn.type = 'button';
+    pauseBtn.classList.add('slide-toggle-play');
+    pauseBtn.setAttribute('aria-label', 'Pause auto-advance');
+    const nextBtn = buttonsContainer.querySelector('.slide-next');
+    buttonsContainer.insertBefore(pauseBtn, nextBtn);
+
+    pauseBtn.addEventListener('click', () => {
+      const isPaused = pauseBtn.classList.toggle('paused');
+      if (isPaused) {
+        stopAutoAdvance(block);
+        pauseBtn.setAttribute('aria-label', 'Resume auto-advance');
+      } else {
+        startAutoAdvance(block);
+        pauseBtn.setAttribute('aria-label', 'Pause auto-advance');
+      }
+    });
+
+    // Indicators go inside the slides container (overlaid on image)
+    container.append(indicatorsNav);
+    // Nav buttons go after the container (below the image)
+    block.navButtonsContainer = buttonsContainer;
   }
 
   rows.forEach((row, idx) => {
@@ -155,14 +221,52 @@ export default async function decorate(block) {
   container.append(slidesWrapper);
   block.prepend(container);
 
+  if (block.navButtonsContainer) {
+    block.append(block.navButtonsContainer);
+    delete block.navButtonsContainer;
+  }
+
+  block.dataset.activeSlide = '0';
+
   if (!isSingleSlide) {
-    initSlider(block);
-    slidesWrapper.addEventListener('keydown', (e) => {
+    // Bind indicator and prev/next clicks (fade-aware)
+    const indicatorBtns = block.querySelectorAll('.carousel-slide-indicator button');
+    indicatorBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const indicator = e.currentTarget.closest('.carousel-slide-indicator');
+        if (indicator) {
+          const target = parseInt(indicator.dataset.targetSlide, 10);
+          if (!Number.isNaN(target)) showSlide(block, target);
+        }
+      });
+    });
+
+    const prevBtn = block.querySelector('.slide-prev');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const current = parseInt(block.dataset.activeSlide, 10) || 0;
+        showSlide(block, current - 1);
+      });
+    }
+
+    const nextBtn = block.querySelector('.slide-next');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const current = parseInt(block.dataset.activeSlide, 10) || 0;
+        showSlide(block, current + 1);
+      });
+    }
+
+    // Keyboard nav
+    block.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       const current = parseInt(block.dataset.activeSlide, 10) || 0;
       const next = e.key === 'ArrowLeft' ? current - 1 : current + 1;
       e.preventDefault();
-      showSlide(block, next, 'smooth');
+      showSlide(block, next);
     });
+
+    // Start auto-advance
+    startAutoAdvance(block);
   }
 }
