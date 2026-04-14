@@ -221,6 +221,11 @@ footer .footer .footer-copyright {
   font-size: 14px;
   color: #fff;
   margin-top: 16px;
+  padding-top: 16px;
+  background-image: linear-gradient(to right, #fff 50%, transparent 0%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
 }
 
 /* ---- Desktop (900px+) ---- */
@@ -237,6 +242,10 @@ footer .footer .footer-copyright {
     gap: 16px;
     align-items: start;
     padding: 24px 0 16px;
+  }
+
+  footer .footer .footer-bottom p:has(.footer-contact-btn) {
+    grid-column: 2;
   }
 
   footer .footer .footer-bottom .footer-copyright {
