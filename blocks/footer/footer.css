@@ -25,7 +25,7 @@ footer .footer .footer-columns::after {
   top: 0;
   width: 50%;
   height: 100%;
-  background: url('/content/images/footer_map.jpg') center / cover no-repeat;
+  background: var(--footer-map-bg) center / cover no-repeat;
   opacity: 0.25;
   pointer-events: none;
   z-index: 0;
@@ -100,8 +100,8 @@ footer .footer .footer-social-icons a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background-color: #fff;
   border-radius: 50%;
   color: var(--primary-color, #005bbb);
@@ -114,14 +114,54 @@ footer .footer .footer-social-icons a:hover {
 }
 
 footer .footer .footer-social-icons .icon {
-  width: 24px;
-  height: 24px;
+  display: block;
+  width: 30px;
+  height: 30px;
 }
 
-footer .footer .footer-social-icons .icon svg {
-  width: 24px;
-  height: 24px;
-  fill: currentcolor;
+footer .footer .footer-social-icons .icon svg,
+footer .footer .footer-social-icons .icon img {
+  display: none;
+}
+
+footer .footer .footer-social-icons .icon {
+  background-color: var(--primary-color, #005bbb);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+footer .footer .footer-social-icons .icon.icon-facebook {
+  -webkit-mask-image: url('/icons/facebook.svg');
+  mask-image: url('/icons/facebook.svg');
+}
+
+footer .footer .footer-social-icons .icon.icon-instagram {
+  -webkit-mask-image: url('/icons/instagram.svg');
+  mask-image: url('/icons/instagram.svg');
+}
+
+footer .footer .footer-social-icons .icon.icon-linkedin {
+  -webkit-mask-image: url('/icons/linkedin.svg');
+  mask-image: url('/icons/linkedin.svg');
+}
+
+footer .footer .footer-social-icons .icon.icon-tiktok {
+  -webkit-mask-image: url('/icons/tiktok.svg');
+  mask-image: url('/icons/tiktok.svg');
+}
+
+footer .footer .footer-social-icons .icon.icon-twitter {
+  -webkit-mask-image: url('/icons/twitter.svg');
+  mask-image: url('/icons/twitter.svg');
+}
+
+footer .footer .footer-social-icons .icon.icon-youtube {
+  -webkit-mask-image: url('/icons/youtube.svg');
+  mask-image: url('/icons/youtube.svg');
 }
 
 /* ---- Dashed Separator ---- */

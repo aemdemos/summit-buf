@@ -74,6 +74,14 @@ export default async function decorate(block) {
       column.className = 'footer-column';
       column.append(...section.childNodes);
       decorateSocialIcons(column);
+
+      // Extract decorative map image and set as columns background
+      const mapImg = column.querySelector('img[src*="map"][alt=""]');
+      if (mapImg) {
+        linkColumnsSection.style.setProperty('--footer-map-bg', `url("${mapImg.src}")`);
+        mapImg.closest('p')?.remove();
+      }
+
       linkColumnsSection.appendChild(column);
     } else {
       bottomSection.append(...section.childNodes);
