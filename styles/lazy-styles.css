@@ -6,6 +6,11 @@ main > .section:has(.carousel-faces) {
   overflow: visible;
 }
 
+main > .section:has(.carousel-faces) > * {
+  position: relative;
+  z-index: 1;
+}
+
 main > .section:has(.carousel-faces)::before {
   content: '';
   position: absolute;
@@ -13,6 +18,7 @@ main > .section:has(.carousel-faces)::before {
   left: 0;
   bottom: 0;
   width: 55%;
+  z-index: 0;
   background-image: url('/icons/ink-splat-dot.svg');
   background-size: 117dvw;
   background-position: right bottom;
