@@ -289,6 +289,23 @@ main .section.highlight {
 }
 
 /* programs section — "We have your major" default content */
+main > .section.programs {
+  position: relative;
+}
+
+main > .section.programs::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: url('/icons/colorbar.png');
+  background-size: 1920px 16px;
+  z-index: 4;
+}
+
 main > .section.programs > div {
   text-align: center;
   padding-top: 50px;
