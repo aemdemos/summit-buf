@@ -58,8 +58,9 @@ export default async function decorate(block) {
   if (!resp.ok) return;
 
   const html = await resp.text();
-  const fragment = document.createElement('div');
-  fragment.innerHTML = html;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const fragment = doc.body;
 
   const sections = fragment.querySelectorAll(':scope > div');
   const linkColumnsSection = document.createElement('div');
