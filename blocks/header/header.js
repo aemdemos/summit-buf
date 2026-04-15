@@ -46,14 +46,15 @@ function buildFeaturedColumn(featured) {
   const innerList = featured.querySelector('ul');
   if (innerList) {
     const imgLink = innerList.querySelector('a:has(img)');
-    if (imgLink) {
+    const barePicture = !imgLink ? innerList.querySelector('li > picture, li > img') : null;
+    if (imgLink || barePicture) {
       const imgWrap = document.createElement('div');
       imgWrap.className = 'megamenu-featured-image';
-      imgWrap.append(imgLink.cloneNode(true));
+      imgWrap.append((imgLink || barePicture).cloneNode(true));
       col.append(imgWrap);
     }
     const textLi = [...innerList.children].find(
-      (li) => !li.querySelector('a') && li.textContent.trim().length > 0,
+      (li) => !li.querySelector('a') && !li.querySelector('picture') && !li.querySelector('img') && li.textContent.trim().length > 0,
     );
     if (textLi) {
       const p = document.createElement('p');
@@ -82,13 +83,14 @@ function buildCategoryColumn(cat) {
     [...catList.children].forEach((linkLi) => {
       const li = document.createElement('li');
       const a = linkLi.querySelector('a');
+      const barePic = linkLi.querySelector(':scope > picture, :scope > img');
       if (a) {
         if (a.classList.contains('cta-button')) {
           const ctaWrap = document.createElement('div');
           ctaWrap.className = 'megamenu-cta';
           ctaWrap.append(a.cloneNode(true));
           col.append(ctaWrap);
-        } else if (a.querySelector('img')) {
+        } else if (a.querySelector('img') || a.querySelector('picture')) {
           const imgWrap = document.createElement('div');
           imgWrap.className = 'megamenu-column-image';
           imgWrap.append(a.cloneNode(true));
@@ -97,6 +99,11 @@ function buildCategoryColumn(cat) {
           li.append(a.cloneNode(true));
           ul.append(li);
         }
+      } else if (barePic) {
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'megamenu-column-image';
+        imgWrap.append(barePic.cloneNode(true));
+        col.append(imgWrap);
       }
     });
     if (ul.children.length > 0) col.append(ul);
