@@ -252,15 +252,25 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   }
 }
 
-/* --- Faces variant (unchanged) --- */
+/* --- Faces variant --- */
 
 main > .section > .carousel-wrapper:has(.carousel-faces) {
   max-width: 1920px;
   padding: 0 32px;
+  margin-top: 48px;
 }
 
 .carousel.carousel-faces {
   min-height: auto;
+}
+
+/* Faces & Voices heading */
+.carousel .carousel-faces-heading {
+  font-family: var(--body-font-family, Sofia, Arial, sans-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color, #005bbb);
+  margin: 0 0 12px;
 }
 
 .carousel-faces-layout {
@@ -301,14 +311,17 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
 }
 
 .carousel .carousel-faces-text p:first-child {
+  font-family: var(--heading-font-family, More, Georgia, serif);
   font-size: 20px;
   font-style: italic;
-  color: var(--brand-primary);
+  color: var(--brand-primary, #005bbb);
   margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .carousel .carousel-faces-text p:last-child {
   font-weight: 600;
+  color: var(--brand-primary, #005bbb);
   margin-bottom: 0;
 }
 
@@ -372,7 +385,8 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
     position: relative;
     display: flex;
     flex-direction: column;
-    align-self: stretch;
+    justify-content: center;
+    align-self: center;
   }
 
   .carousel .carousel-faces-text {

@@ -153,7 +153,11 @@ function decorateFaces(block, blockId, rows) {
 
   block.dataset.activeSlide = '0';
 
-  contentCol.append(textArea, thumbRow);
+  const heading = document.createElement('h2');
+  heading.className = 'carousel-faces-heading';
+  heading.textContent = 'Faces & Voices';
+
+  contentCol.append(heading, textArea, thumbRow);
   layout.append(imageCol, contentCol);
   block.textContent = '';
   block.append(layout);
