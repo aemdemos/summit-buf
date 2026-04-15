@@ -689,6 +689,7 @@ header .nav-cta:hover {
   header .nav-megamenu-panel.has-sidebar[aria-hidden='false'] {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
   }
 
   /* Header spans full width in Layout B */
