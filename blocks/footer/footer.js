@@ -58,6 +58,7 @@ export default async function decorate(block) {
   if (!resp.ok) return;
 
   const html = await resp.text();
+  // eslint-disable-next-line secure-coding/no-xxe-injection -- browser DOMParser with text/html is not vulnerable to XXE
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const fragment = doc.body;

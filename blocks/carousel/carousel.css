@@ -293,6 +293,93 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative disks behind portrait */
+.carousel .carousel-faces-disks {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .carousel .carousel-faces-image {
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .carousel .carousel-faces-content {
+    z-index: 2;
+  }
+
+  .carousel .carousel-faces-disks {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .carousel .carousel-faces-disk {
+    position: absolute;
+    border-radius: 50%;
+    transition: transform 0.5s ease-out;
+  }
+
+  /* Disk 1: teal — large, top-left area */
+  .carousel .carousel-faces-disk-1 {
+    width: 55%;
+    aspect-ratio: 1;
+    background-color: #2f9fd0;
+    top: -15%;
+    left: -25%;
+  }
+
+  /* Disk 2: coral/salmon — medium, right-center */
+  .carousel .carousel-faces-disk-2 {
+    width: 35%;
+    aspect-ratio: 1;
+    background-color: #e8927c;
+    bottom: 5%;
+    right: -15%;
+  }
+
+  /* Theme 1 (default) */
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-1 {
+    transform: translate(0, 0);
+  }
+
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-2 {
+    transform: translate(0, 0);
+  }
+
+  /* Theme 2 */
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-1 {
+    transform: translate(15%, 25%);
+  }
+
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-2 {
+    transform: translate(-30%, -40%);
+  }
+
+  /* Theme 3 */
+  .carousel-faces[data-faces-theme="3"] .carousel-faces-disk-1 {
+    transform: translate(-10%, 40%);
+  }
+
+  .carousel-faces[data-faces-theme="3"] .carousel-faces-disk-2 {
+    transform: translate(20%, -60%);
+  }
+
+  /* Theme 4 */
+  .carousel-faces[data-faces-theme="4"] .carousel-faces-disk-1 {
+    transform: translate(25%, -10%);
+  }
+
+  .carousel-faces[data-faces-theme="4"] .carousel-faces-disk-2 {
+    transform: translate(-20%, 30%);
+  }
 }
 
 .carousel .carousel-faces-content {
