@@ -75,16 +75,19 @@ function showFacesSlide(block, index) {
 
   const idx = ((index % contentEls.length) + contentEls.length) % contentEls.length;
   block.dataset.activeSlide = String(idx);
+  block.dataset.facesTheme = String((idx % 2) + 1);
 
   const imageCol = block.querySelector('.carousel-faces-image');
   const textArea = block.querySelector('.carousel-faces-text');
 
   if (imageCol) {
-    imageCol.textContent = '';
-    const img = document.createElement('img');
+    let img = imageCol.querySelector(':scope > img');
+    if (!img) {
+      img = document.createElement('img');
+      imageCol.prepend(img);
+    }
     img.src = block.facesImages[idx].src;
     img.alt = block.facesImages[idx].alt;
-    imageCol.append(img);
   }
 
   if (textArea) {
@@ -152,8 +155,23 @@ function decorateFaces(block, blockId, rows) {
   });
 
   block.dataset.activeSlide = '0';
+  block.dataset.facesTheme = '1';
 
-  contentCol.append(textArea, thumbRow);
+  const heading = document.createElement('h2');
+  heading.className = 'carousel-faces-heading';
+  heading.textContent = 'Faces & Voices';
+
+  // Decorative disks behind portrait
+  const diskContainer = document.createElement('div');
+  diskContainer.className = 'carousel-faces-disks';
+  for (let i = 1; i <= 3; i += 1) {
+    const disk = document.createElement('div');
+    disk.className = `carousel-faces-disk carousel-faces-disk-${i}`;
+    diskContainer.append(disk);
+  }
+  imageCol.append(diskContainer);
+
+  contentCol.append(heading, textArea, thumbRow);
   layout.append(imageCol, contentCol);
   block.textContent = '';
   block.append(layout);

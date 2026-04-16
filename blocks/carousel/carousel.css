@@ -14,6 +14,7 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   position: relative;
 }
 
+
 .carousel .carousel-slides-container {
   position: relative;
 }
@@ -251,15 +252,25 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   }
 }
 
-/* --- Faces variant (unchanged) --- */
+/* --- Faces variant --- */
 
 main > .section > .carousel-wrapper:has(.carousel-faces) {
   max-width: 1920px;
   padding: 0 32px;
+  margin-top: 48px;
 }
 
 .carousel.carousel-faces {
   min-height: auto;
+}
+
+/* Faces & Voices heading */
+.carousel .carousel-faces-heading {
+  font-family: var(--body-font-family, Sofia, Arial, sans-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color, #005bbb);
+  margin: 0 0 12px;
 }
 
 .carousel-faces-layout {
@@ -282,6 +293,92 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative disks behind portrait */
+.carousel .carousel-faces-disks {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .carousel .carousel-faces-image {
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .carousel .carousel-faces-content {
+    z-index: 2;
+  }
+
+  .carousel .carousel-faces-disks {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .carousel .carousel-faces-disk {
+    position: absolute;
+    border-radius: 50%;
+    transition: top 0.5s ease-out, bottom 0.5s ease-out;
+  }
+
+  /* Disk 1: teal */
+  .carousel .carousel-faces-disk-1 {
+    width: 200px;
+    aspect-ratio: 1;
+    background-color: rgb(0 166 156);
+    top: 0;
+    left: 0;
+  }
+
+  /* Disk 2: coral */
+  .carousel .carousel-faces-disk-2 {
+    width: 135px;
+    aspect-ratio: 1;
+    background-color: #e8927c;
+    bottom: 5%;
+    right: -2%;
+  }
+
+  /* Disk 3: yellow */
+  .carousel .carousel-faces-disk-3 {
+    width: 80px;
+    aspect-ratio: 1;
+    background-color: rgb(255 199 44);
+    bottom: 70%;
+    right: -2%;
+  }
+
+  /* Position 1 (odd slides) */
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-1 {
+    top: 0;
+  }
+
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-2 {
+    bottom: 5%;
+  }
+
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-3 {
+    bottom: 70%;
+  }
+
+  /* Position 2 (even slides) */
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-1 {
+    top: 60%;
+  }
+
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-2 {
+    bottom: 70%;
+  }
+
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-3 {
+    bottom: 5%;
+  }
 }
 
 .carousel .carousel-faces-content {
@@ -300,14 +397,17 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
 }
 
 .carousel .carousel-faces-text p:first-child {
+  font-family: var(--heading-font-family, More, Georgia, serif);
   font-size: 20px;
   font-style: italic;
-  color: var(--brand-primary);
+  color: var(--brand-primary, #005bbb);
   margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .carousel .carousel-faces-text p:last-child {
   font-weight: 600;
+  color: var(--brand-primary, #005bbb);
   margin-bottom: 0;
 }
 
@@ -362,16 +462,18 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   }
 
   .carousel .carousel-faces-image {
-    width: 100%;
+    width: 80%;
     height: auto;
     aspect-ratio: 1 / 1;
+    padding-left: 100px;
   }
 
   .carousel .carousel-faces-content {
     position: relative;
     display: flex;
     flex-direction: column;
-    align-self: stretch;
+    justify-content: center;
+    align-self: center;
   }
 
   .carousel .carousel-faces-text {
