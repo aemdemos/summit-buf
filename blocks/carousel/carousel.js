@@ -81,13 +81,13 @@ function showFacesSlide(block, index) {
   const textArea = block.querySelector('.carousel-faces-text');
 
   if (imageCol) {
-    const diskContainer = imageCol.querySelector('.carousel-faces-disks');
-    imageCol.textContent = '';
-    const img = document.createElement('img');
+    let img = imageCol.querySelector(':scope > img');
+    if (!img) {
+      img = document.createElement('img');
+      imageCol.prepend(img);
+    }
     img.src = block.facesImages[idx].src;
     img.alt = block.facesImages[idx].alt;
-    imageCol.append(img);
-    if (diskContainer) imageCol.append(diskContainer);
   }
 
   if (textArea) {
