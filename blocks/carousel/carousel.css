@@ -267,7 +267,7 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
 /* Faces & Voices heading */
 .carousel .carousel-faces-heading {
   font-family: var(--body-font-family, Sofia, Arial, sans-serif);
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--primary-color, #005bbb);
   margin: 0 0 12px;
@@ -398,9 +398,9 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
 
 .carousel .carousel-faces-text p:first-child {
   font-family: var(--heading-font-family, More, Georgia, serif);
-  font-size: 20px;
-  font-style: italic;
-  color: var(--brand-primary, #005bbb);
+  font-size: 30px;
+  font-style: normal;
+  color: rgb(47 159 208);
   margin-bottom: 8px;
   line-height: 1.5;
 }
