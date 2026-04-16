@@ -75,7 +75,7 @@ function showFacesSlide(block, index) {
 
   const idx = ((index % contentEls.length) + contentEls.length) % contentEls.length;
   block.dataset.activeSlide = String(idx);
-  block.dataset.facesTheme = String((idx % 4) + 1);
+  block.dataset.facesTheme = String((idx % 2) + 1);
 
   const imageCol = block.querySelector('.carousel-faces-image');
   const textArea = block.querySelector('.carousel-faces-text');
@@ -164,7 +164,7 @@ function decorateFaces(block, blockId, rows) {
   // Decorative disks behind portrait
   const diskContainer = document.createElement('div');
   diskContainer.className = 'carousel-faces-disks';
-  for (let i = 1; i <= 2; i += 1) {
+  for (let i = 1; i <= 3; i += 1) {
     const disk = document.createElement('div');
     disk.className = `carousel-faces-disk carousel-faces-disk-${i}`;
     diskContainer.append(disk);

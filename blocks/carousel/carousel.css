@@ -324,61 +324,60 @@ main > .section > .carousel-wrapper:has(.carousel-faces) {
   .carousel .carousel-faces-disk {
     position: absolute;
     border-radius: 50%;
-    transition: transform 0.5s ease-out;
+    transition: top 0.5s ease-out, bottom 0.5s ease-out;
   }
 
-  /* Disk 1: teal — large, top-left area */
+  /* Disk 1: teal */
   .carousel .carousel-faces-disk-1 {
-    width: 55%;
+    width: 200px;
     aspect-ratio: 1;
-    background-color: #2f9fd0;
-    top: -15%;
-    left: -25%;
+    background-color: rgb(0 166 156);
+    top: 0;
+    left: -8%;
   }
 
-  /* Disk 2: coral/salmon — medium, right-center */
+  /* Disk 2: coral */
   .carousel .carousel-faces-disk-2 {
-    width: 35%;
+    width: 135px;
     aspect-ratio: 1;
     background-color: #e8927c;
     bottom: 5%;
-    right: -15%;
+    right: -2%;
   }
 
-  /* Theme 1 (default) */
+  /* Disk 3: yellow */
+  .carousel .carousel-faces-disk-3 {
+    width: 80px;
+    aspect-ratio: 1;
+    background-color: rgb(255 199 44);
+    bottom: 70%;
+    right: -2%;
+  }
+
+  /* Position 1 (odd slides) */
   .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-1 {
-    transform: translate(0, 0);
+    top: 0;
   }
 
   .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-2 {
-    transform: translate(0, 0);
+    bottom: 5%;
   }
 
-  /* Theme 2 */
+  .carousel-faces[data-faces-theme="1"] .carousel-faces-disk-3 {
+    bottom: 70%;
+  }
+
+  /* Position 2 (even slides) */
   .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-1 {
-    transform: translate(15%, 25%);
+    top: 60%;
   }
 
   .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-2 {
-    transform: translate(-30%, -40%);
+    bottom: 70%;
   }
 
-  /* Theme 3 */
-  .carousel-faces[data-faces-theme="3"] .carousel-faces-disk-1 {
-    transform: translate(-10%, 40%);
-  }
-
-  .carousel-faces[data-faces-theme="3"] .carousel-faces-disk-2 {
-    transform: translate(20%, -60%);
-  }
-
-  /* Theme 4 */
-  .carousel-faces[data-faces-theme="4"] .carousel-faces-disk-1 {
-    transform: translate(25%, -10%);
-  }
-
-  .carousel-faces[data-faces-theme="4"] .carousel-faces-disk-2 {
-    transform: translate(-20%, 30%);
+  .carousel-faces[data-faces-theme="2"] .carousel-faces-disk-3 {
+    bottom: 5%;
   }
 }
 
