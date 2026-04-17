@@ -136,7 +136,7 @@ main > .section > .cards-wrapper {
 .cards .cards-event-details p {
   margin: 0;
   color: var(--brand-primary);
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.4;
 }
 
@@ -156,7 +156,7 @@ main > .section > .cards-wrapper {
 .cards .cards-event-desc {
   flex: 1;
   font-family: var(--body-font-family);
-  font-size: 29px;
+  font-size: 48px;
   font-weight: 600;
   color: var(--brand-primary);
   line-height: 1.3;
@@ -194,7 +194,7 @@ main > .section > .cards-wrapper {
 }
 
 .cards > ul > li.cards-event .cards-event-details p {
-  font-size: 13px;
+  font-size: 20px;
 }
 
 /* events section CTA button — aligned with datebox left edge, bottom of first column */
@@ -211,9 +211,9 @@ main > .section > .cards-wrapper {
 
 .section:has(.cards-featured) > .default-content-wrapper a.button {
   background-color: var(--brand-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 900;
-  padding: 10px 17px;
+  padding: 8px 17px;
   border-radius: 5px;
   margin: 0;
 }

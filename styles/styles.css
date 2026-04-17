@@ -359,8 +359,9 @@ main > .section.programs .programs-majors ul {
 }
 
 main > .section.programs .programs-majors li {
-  color: var(--brand-primary);
-  font-size: 20px;
+  color: rgb(47 159 208);
+  font-size: 30px;
+  font-weight: 900;
   padding: 4px 0;
 }
 
@@ -374,7 +375,8 @@ main > .section.programs .programs-info {
 }
 
 main > .section.programs .programs-info p {
-  font-size: var(--body-font-size-m);
+  font-size: 30px;
+  color: var(--brand-primary);
   line-height: 1.5;
   margin-bottom: 24px;
 }
