@@ -99,7 +99,7 @@ function updateContent(content, newCardsHTML) {
 
   for (const line of lines) {
     if (!replaced && line.includes('<div class="cards">') && !line.includes('<img')) {
-      updated.push(`<div>${newCardsHTML}</div>`);
+      updated.push(`<div>${newCardsHTML}<p><strong><a href="https://calendar.buffalo.edu/">See more events</a></strong></p></div>`);
       replaced = true;
       continue;
     }
