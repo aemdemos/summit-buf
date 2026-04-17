@@ -22,7 +22,7 @@ main > .section > .cards-wrapper {
 
 .cards .cards-card-body {
   margin: var(--cards-card-body-margin);
-  padding: 0 24px 24px;
+  padding: 60px 24px;
 }
 
 /* story cards: blue background + hover gradient only when preceded by an image */
@@ -42,8 +42,8 @@ main > .section > .cards-wrapper {
 
 .cards .cards-card-body h3 {
   margin: 0;
-  font-family: var(--heading-font-family);
-  font-size: 16px;
+  font-family: var(--body-font-family);
+  font-size: 32px;
   font-weight: 600;
   line-height: 1.4;
 }
