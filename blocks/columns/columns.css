@@ -66,13 +66,13 @@
 .section.columns-container .columns > div > div {
   text-align: center;
   color: #fff;
-  font-size: 17px;
+  font-size: 28px;
   line-height: 1.4;
 }
 
 .section.columns-container .columns > div > div strong {
   display: block;
-  font-size: 58px;
+  font-size: 84px;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 4px;

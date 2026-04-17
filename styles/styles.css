@@ -43,7 +43,7 @@
   --heading-font-size-xs: 14px;
 
   /* layout */
-  --max-width-site: 960px;
+  --max-width-site: 1280px;
 
   /* nav heights */
   --nav-height: 64px;
@@ -286,6 +286,19 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* research heading */
+h2#see-how-our-research-improves-lives {
+  text-align: center;
+  font-size: 48px;
+  color: var(--brand-primary);
+  padding: 50px;
+}
+
+h2#see-how-our-research-improves-lives a {
+  color: rgb(47 159 208);
+  text-decoration-line: underline;
 }
 
 /* programs section — "We have your major" default content */
