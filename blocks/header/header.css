@@ -34,7 +34,7 @@ header .nav-wrapper {
 header nav {
   display: flex;
   align-items: center;
-  max-width: 1440px;
+  max-width: 1100px;
   margin: 0 auto;
   height: var(--nav-height);
   padding: 0 24px;
