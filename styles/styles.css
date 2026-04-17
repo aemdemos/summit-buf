@@ -304,6 +304,13 @@ h2#see-how-our-research-improves-lives a {
 /* programs section — "We have your major" default content */
 main > .section.programs {
   position: relative;
+  background-image: image-set(
+    url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-1x_bw.png") 1dppx,
+    url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-2x_bw.png") 2dppx
+  );
+  background-size: auto;
+  background-position: 0px 50%;
+  background-repeat: repeat;
 }
 
 main > .section.programs::after {
@@ -321,8 +328,8 @@ main > .section.programs::after {
 
 main > .section.programs > div {
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 40px;
+  padding-top: 110px;
+  padding-bottom: 100px;
 }
 
 main > .section.programs h2 {
