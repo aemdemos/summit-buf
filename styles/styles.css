@@ -304,6 +304,7 @@ main > .section.research h2 a {
 /* programs section — "We have your major" default content */
 main > .section.programs {
   position: relative;
+  background-image: url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-2x_bw.png");
   background-image: image-set(
     url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-1x_bw.png") 1dppx,
     url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-2x_bw.png") 2dppx
