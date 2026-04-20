@@ -289,14 +289,14 @@ main .section.highlight {
 }
 
 /* research heading */
-h2#see-how-our-research-improves-lives {
+main > .section.research h2 {
   text-align: center;
   font-size: 48px;
   color: var(--brand-primary);
   padding: 50px;
 }
 
-h2#see-how-our-research-improves-lives a {
+main > .section.research h2 a {
   color: rgb(47 159 208);
   text-decoration-line: underline;
 }
