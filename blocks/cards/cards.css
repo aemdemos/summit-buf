@@ -90,7 +90,7 @@ main > .section > .cards-wrapper {
 
 .cards:not(:has(.cards-card-image)) > ul {
   grid-template-columns: 1fr 1fr;
-  min-height: 400px;
+  min-height: 500px;
 }
 
 /* shared event card elements */
