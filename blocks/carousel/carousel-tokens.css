@@ -15,4 +15,6 @@
   --carousel-nav-button-icon-color: var(--brand-primary, #005bbb);
   --carousel-transition-duration: 2s;
   --carousel-nav-gap: 14px;
+  --carousel-zoom-scale: 1.2;
+  --carousel-zoom-duration: 6s;
 }

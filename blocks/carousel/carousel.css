@@ -76,6 +76,12 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  transform: scale(1);
+  transition: transform var(--carousel-zoom-duration) ease-out;
+}
+
+.carousel .carousel-slide[aria-hidden='false'] .carousel-slide-image img {
+  transform: scale(var(--carousel-zoom-scale));
 }
 
 /* Caption text: centered on image, large bold white with text-shadow */
