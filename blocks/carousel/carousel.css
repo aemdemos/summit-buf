@@ -58,6 +58,14 @@ main > .section > .carousel-wrapper:not(:has(.carousel-faces)) {
   inset: 0;
 }
 
+.carousel .carousel-slide .carousel-slide-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 50%);
+  z-index: 1;
+}
+
 .carousel .carousel-slide .carousel-slide-image picture {
   position: absolute;
   inset: 0;
