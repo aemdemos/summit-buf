@@ -30,7 +30,7 @@ main > .section:has(.carousel-faces)::before {
 @media (width >= 900px) {
   main > .section:has(.carousel-faces)::before {
     background-size: 2200px;
-    top: -400px;
+    top: -580px;
     width: 50%;
   }
 }
