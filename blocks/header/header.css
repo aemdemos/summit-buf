@@ -593,6 +593,7 @@ header .nav-cta:hover {
 
   header .nav-item {
     border-bottom: none;
+    position: static;
   }
 
   header .nav-item-link {
@@ -620,7 +621,7 @@ header .nav-cta:hover {
   /* ---- Megamenu panel — shared base ---- */
   header .nav-megamenu-panel[aria-hidden='false'] {
     display: block;
-    position: fixed;
+    position: absolute;
     top: var(--nav-height);
     left: 230px;
     width: calc(100vw - 310px);
