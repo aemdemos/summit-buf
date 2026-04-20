@@ -43,7 +43,7 @@
   --heading-font-size-xs: 14px;
 
   /* layout */
-  --max-width-site: 960px;
+  --max-width-site: 1280px;
 
   /* nav heights */
   --nav-height: 64px;
@@ -288,9 +288,30 @@ main .section.highlight {
   padding: 40px 0;
 }
 
+/* research heading */
+main > .section.research h2 {
+  text-align: center;
+  font-size: 48px;
+  color: var(--brand-primary);
+  padding: 50px;
+}
+
+main > .section.research h2 a {
+  color: rgb(47 159 208);
+  text-decoration-line: underline;
+}
+
 /* programs section — "We have your major" default content */
 main > .section.programs {
   position: relative;
+  background-image: url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-2x_bw.png");
+  background-image: image-set(
+    url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-1x_bw.png") 1dppx,
+    url("https://www.buffalo.edu/content/dam/www/eub/customs/homepage-redesign-search-bg-2x_bw.png") 2dppx
+  );
+  background-size: auto;
+  background-position: 0px 50%;
+  background-repeat: repeat;
 }
 
 main > .section.programs::after {
@@ -308,8 +329,8 @@ main > .section.programs::after {
 
 main > .section.programs > div {
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 40px;
+  padding-top: 110px;
+  padding-bottom: 100px;
 }
 
 main > .section.programs h2 {

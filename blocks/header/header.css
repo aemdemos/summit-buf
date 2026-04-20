@@ -34,7 +34,7 @@ header .nav-wrapper {
 header nav {
   display: flex;
   align-items: center;
-  max-width: 1440px;
+  max-width: 1100px;
   margin: 0 auto;
   height: var(--nav-height);
   padding: 0 24px;
@@ -561,7 +561,7 @@ header .nav-cta:hover {
   }
 
   header .nav-ribbon {
-    left: 80px;
+    left: max(80px, calc(50% - 720px + 80px));
   }
 
   /* Hide nav-brand on desktop — ribbon replaces it */
@@ -593,6 +593,7 @@ header .nav-cta:hover {
 
   header .nav-item {
     border-bottom: none;
+    position: static;
   }
 
   header .nav-item-link {
@@ -620,7 +621,7 @@ header .nav-cta:hover {
   /* ---- Megamenu panel — shared base ---- */
   header .nav-megamenu-panel[aria-hidden='false'] {
     display: block;
-    position: fixed;
+    position: absolute;
     top: var(--nav-height);
     left: 230px;
     width: calc(100vw - 310px);
